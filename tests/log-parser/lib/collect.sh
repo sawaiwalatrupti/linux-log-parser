@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # lib/collect.sh — log data collection (file, dmesg, journalctl)
 #
-# Requires: bash-test-libs/bash/output.sh sourced first (log, error).
+# Requires: testlib-core/bash/output.sh sourced first (log, error).
 #
 # Provides:
 #   collect_logs TMPFILE INPUT_FILE USE_DMESG USE_JOURNAL SINCE_TIME

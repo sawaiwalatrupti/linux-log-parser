@@ -6,7 +6,7 @@
 #   count_matches PATTERN FILE  — echo integer count of matching lines
 #   extract_matches PATTERN LABEL FILE [MAX]  — emit first MAX matching lines
 #
-# Requires: bash-test-libs/bash/output.sh sourced first (emit, BOLD, RESET).
+# Requires: testlib-core/bash/output.sh sourced first (emit, BOLD, RESET).
 
 count_matches() {
     grep -cEi "$1" "$2" 2>/dev/null || echo 0

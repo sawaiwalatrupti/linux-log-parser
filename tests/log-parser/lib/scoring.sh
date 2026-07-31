@@ -3,7 +3,7 @@
 # lib/scoring.sh — severity scoring for log events
 #
 # Requires: patterns.sh sourced and count vars populated (KERNEL_PANICS etc.)
-# Requires: bash-test-libs/bash/colors.sh sourced first (RED, YELLOW, GREEN, RESET).
+# Requires: testlib-core/bash/colors.sh sourced first (RED, YELLOW, GREEN, RESET).
 #
 # Provides:
 #   compute_severity  — sets SCORE and SEVERITY based on event counts
