@@ -1,0 +1,7 @@
+# .shellcheckrc — shellcheck configuration for linux-log-parser
+#
+# SC1091: suppress "not following source" — testlib-core is a sibling repo
+#         sourced at runtime via a dynamic path; shellcheck cannot resolve it
+#         statically. The # shellcheck source= directives in each script are
+#         the correct documentation of what is sourced.
+disable=SC1091
