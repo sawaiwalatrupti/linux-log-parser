@@ -34,6 +34,7 @@ source "$LIB_DIR/collect.sh"
 source "$LIB_DIR/scoring.sh"
 
 # ── state ─────────────────────────────────────────────────────────────────────
+# shellcheck disable=SC2034  # consumed by emit() in testlib-core/bash/output.sh
 REPORT_LINES=()
 INPUT_FILE=""
 OUTPUT_FILE=""
@@ -86,6 +87,7 @@ KERNEL_PANICS=$(count_matches "$PAT_KERNEL_PANICS" "$TMPFILE")
 OOM_KILLS=$(count_matches     "$PAT_OOM_KILLS"     "$TMPFILE")
 SEGFAULTS=$(count_matches     "$PAT_SEGFAULTS"     "$TMPFILE")
 HW_ERRORS=$(count_matches     "$PAT_HW_ERRORS"     "$TMPFILE")
+# shellcheck disable=SC2153  # PAT_ERRORS is defined in lib/patterns.sh (sourced above)
 ERRORS=$(count_matches        "$PAT_ERRORS"        "$TMPFILE")
 WARNINGS=$(count_matches      "$PAT_WARNINGS"      "$TMPFILE")
 CALL_TRACES=$(count_matches   "$PAT_CALL_TRACES"   "$TMPFILE")
@@ -164,3 +166,5 @@ emit "${BOLD}══════════════════════�
 emit ""
 
 [[ -n "$OUTPUT_FILE" ]] && save_report "$OUTPUT_FILE"
+
+[[ "$SCORE" -gt 0 ]] && exit 1 || exit 0
