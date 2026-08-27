@@ -9,7 +9,10 @@
 # Requires: testlib-core/bash/output.sh sourced first (emit, BOLD, RESET).
 
 count_matches() {
-    grep -cEi "$1" "$2" 2>/dev/null || echo 0
+    grep -cEi "$1" "$2" 2>/dev/null || true
+    # grep -c exits 1 on zero matches but still prints "0" — the || true
+    # prevents the fallthrough echo that would produce "0\n0" and break
+    # arithmetic comparisons in the caller.
 }
 
 extract_matches() {
