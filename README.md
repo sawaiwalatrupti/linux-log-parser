@@ -1,5 +1,7 @@
 # linux-log-parser
 
+![CI](https://github.com/sawaiwalatrupti/linux-log-parser/actions/workflows/ci.yml/badge.svg)
+
 A Bash script that scans Linux system logs for errors, warnings, kernel panics, OOM kills, hardware faults, and failed services — and outputs a clean, colour-coded summary report.
 
 Useful for post-mortem analysis, CI test environment debugging, and routine system health checks.
@@ -92,10 +94,27 @@ chmod +x log_parser.sh
 
 ---
 
+## Exit codes
+
+| Code | Meaning |
+|---|---|
+| `0` | No issues found (severity: CLEAN) |
+| `1` | One or more events detected (severity: LOW / WARNING / CRITICAL) |
+
+This makes it suitable for CI pipelines — run after a test job and fail the pipeline automatically if the system logged kernel panics, OOM kills, or other critical events during the test run.
+
+---
+
 ## Requirements
 
 - Bash 4.0+
 - `dmesg` and/or `journalctl` available (for live system mode)
-- No external dependencies
+- [testlib-core](https://github.com/sawaiwalatrupti/testlib-core) cloned as a sibling directory
 
-Tested on RHEL 9, SLES 15, Ubuntu 22.04.
+```bash
+git clone https://github.com/sawaiwalatrupti/testlib-core.git
+git clone https://github.com/sawaiwalatrupti/linux-log-parser.git
+# both must be in the same parent directory
+```
+
+Tested on RHEL 9, SLES 15, Ubuntu 22.04, Ubuntu 24.04.
