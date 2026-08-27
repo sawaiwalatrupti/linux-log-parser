@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Shellcheck Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Run lint
+        run: make lint
+
+  run:
+    name: Run against live journal
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone testlib-core
+        run: git clone --depth=1 https://github.com/sawaiwalatrupti/testlib-core.git ../testlib-core
+
+      - name: Run log parser (live dmesg)
+        run: make test
