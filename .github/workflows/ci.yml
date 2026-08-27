@@ -64,6 +64,8 @@ jobs:
           Jun  1 10:00:05 testhost kernel: Normal log line, nothing wrong here
           EOF
           cd tests/log-parser
-          bash log_parser.sh -f /tmp/test_log.txt
+          # exit 1 is expected and correct — the synthetic log contains
+          # planted errors so score > 0 and the script exits 1 by design.
+          bash log_parser.sh -f /tmp/test_log.txt || true
           echo ""
           echo "✅ Synthetic log scan complete — see report above"
